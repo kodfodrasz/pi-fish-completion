@@ -1,0 +1,29 @@
+name: Fish completion tests
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  test:
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Fish and jq
+        run: |
+          if [ "$RUNNER_OS" = Linux ]; then
+            sudo apt-get update
+            sudo apt-get install --yes fish jq
+          else
+            brew install fish jq
+          fi
+      - name: Check Fish syntax and formatting
+        run: |
+          fish -n pi.fish test.fish
+          fish_indent --check pi.fish test.fish
+          sh -n deploy.sh
+      - name: Run isolated completion tests
+        run: env fish ./test.fish
