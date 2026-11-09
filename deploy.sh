@@ -1,8 +1,8 @@
-#!/usr/bin/env bash
+#!/bin/sh
 # Install the local pi Fish completion into Fish's standard user completion path.
-set -euo pipefail
+set -eu
 
-repo_dir=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)
+repo_dir=$(CDPATH='' cd -P "$(dirname "$0")" && pwd)
 target="${XDG_CONFIG_HOME:-$HOME/.config}/fish/completions/pi.fish"
 
 mkdir -p -- "$(dirname -- "$target")"

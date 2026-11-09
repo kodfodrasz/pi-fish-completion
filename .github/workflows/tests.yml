@@ -4,6 +4,9 @@ on:
   push:
   pull_request:
 
+permissions:
+  contents: read
+
 jobs:
   test:
     strategy:
@@ -20,10 +23,15 @@ jobs:
           else
             brew install fish jq
           fi
+      - name: Report tested environment
+        run: |
+          uname -s
+          fish --version
+          jq --version
       - name: Check Fish syntax and formatting
         run: |
           fish -n pi.fish test.fish
           fish_indent --check pi.fish test.fish
           sh -n deploy.sh
       - name: Run isolated completion tests
-        run: env fish ./test.fish
+        run: fish --no-config ./test.fish
