@@ -13,7 +13,15 @@ Used daily for simple use cases, but **not exhaustively tested**. Bug reports an
 - Pi Coding Agent; the completion definitions target the current CLI.
 - A POSIX shell and standard system utilities for installation. GNU utilities and Make are not required.
 
-The CLI definitions were checked against **Pi 1.5.0**. Local tests passed on Linux with **Fish 4.6.0** and **jq 1.8.1**. Other versions are not guaranteed. GitHub Actions runs the isolated suite on Ubuntu and macOS and records the tested Fish and jq versions in each run; these tests do not execute Pi.
+The CLI definitions were checked against **Pi 1.5.0**. The isolated test suite passed with:
+
+| Environment | Fish | jq |
+| --- | --- | --- |
+| Local Linux | 4.6.0 | 1.8.1 |
+| GitHub Actions Ubuntu | 4.2.1 | 1.8.1 |
+| GitHub Actions macOS | 4.9.3 | 1.8.2 |
+
+Other versions are not guaranteed. GitHub Actions runs the suite on Ubuntu and macOS and records the tested Fish and jq versions in each run. These tests do not execute Pi.
 
 On macOS, Fish and jq can be installed with Homebrew:
 
